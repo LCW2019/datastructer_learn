@@ -29,16 +29,9 @@ void insertionSort(T array,int length)
 {
     for (size_t i = 1; i < length; i++)
     {
-          for (size_t j = i; j >0; j--)  //对比a[i]
+          for (size_t j = i; j >0&array[j]<array[j-1]; j--)  //对比a[i] 与 a[0]~a[i]的元素 如果不符合升序就交换
         {
-            if(array[j]<array[j-1])
-            {
-                swap(array[j],array[j-1]); 
-            }
-            else
-            {
-                break;
-            }
+             swap(array[j],array[j-1]); 
         }
     }
 }
@@ -47,14 +40,15 @@ void insertionSort(T array,int length)
 template<typename T>
 void insertionSortOptimization(T* array,int length)
 {
-    for (size_t i = 1; i < length; i++)
-    {   
-        T e = array[i];
-        int j =i;
-        for (j; j >0&array[j]<array[j-1]; j--)  //对比a[i]
+     for (size_t i = 1; i < length; i++)
+    {
+        T temp = array[i];
+        int j;
+        for (j=i;j>0&array[j-1]>temp; j--)  //对比a[i] 与 a[0]~a[i]的元素 如果不符合升序就交换
         {
-            swap(array[j],array[j-1]);    
+             array[j]=array[j-1]; 
         }
+        array[j] = temp;
     }
 }
 
@@ -69,6 +63,7 @@ int  main()
     int length=10000;
     int* arr = TestData::getRandomData(length,10,1000);
     int* arr_copy = TestData::copyData(arr,length);
+    int* arr_copy_1 = TestData::copyData(arr,length);
     // TestData::my_print<int *>(arr,length);
     // selectionSort(arr,length);
     // TestData::my_print<int *>(arr,length);
@@ -77,8 +72,10 @@ int  main()
     // TestData::testSort("selectionSort",selectionSort,arr,length,false);
     TestData::testSort("selectionSort",selectionSort,arr,length);
     TestData::testSort("insertionSort",insertionSort,arr_copy,length);
+    TestData::testSort("insertionSortOptimization",insertionSortOptimization,arr_copy_1,length);
     delete[]arr;
     delete[]arr_copy;
+    delete[]arr_copy_1;
 
     
     return 0;
