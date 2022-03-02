@@ -52,6 +52,40 @@ void insertionSortOptimization(T* array,int length)
     }
 }
 
+//Ã°ÅÝÅÅÐò
+template<typename T>
+void BubbleSort(T* array,int length)
+{
+  for (size_t i = length-1; i > 0; i--)
+  {
+      for (size_t j = 0; j < i; j++)
+      {
+          if (array[j]>array[j+1])
+          {
+              swap(array[j],array[j+1]);
+          }
+      }
+      
+  }
+}
+
+//Ã°ÅÝÅÅÐò¸Ä½ø°æ±¾
+template<typename T>
+void BubbleSortOptimization(T* array,int length)
+{
+for (size_t i = length-1; i > 0; i--)
+  {
+      for (size_t j = 0; j < i; j++)
+      {
+          if (array[j]>array[j+1])
+          {
+              swap(array[j],array[j+1]);
+          }
+      }
+      
+  }
+}
+
 int  main()
 {
     // int testIntarray[] ={1,2,333,4,5,6,8,7,10,9};
@@ -64,18 +98,21 @@ int  main()
     int* arr = TestData::getRandomData(length,10,1000);
     int* arr_copy = TestData::copyData(arr,length);
     int* arr_copy_1 = TestData::copyData(arr,length);
+    int* arr_copy_2 = TestData::copyData(arr,length);
     // TestData::my_print<int *>(arr,length);
     // selectionSort(arr,length);
     // TestData::my_print<int *>(arr,length);
     // delete[]arr;
 
-    // TestData::testSort("selectionSort",selectionSort,arr,length,false);
+    TestData::testSort("selectionSort",selectionSort,arr,length);
     TestData::testSort("selectionSort",selectionSort,arr,length);
     TestData::testSort("insertionSort",insertionSort,arr_copy,length);
     TestData::testSort("insertionSortOptimization",insertionSortOptimization,arr_copy_1,length);
+    TestData::testSort("BubbleSort",BubbleSort,arr_copy_2,length);
     delete[]arr;
     delete[]arr_copy;
     delete[]arr_copy_1;
+    delete[]arr_copy_2;
 
     
     return 0;
