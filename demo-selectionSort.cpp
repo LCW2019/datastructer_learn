@@ -75,11 +75,13 @@ void BubbleSortOptimization(T* array,int length)
 {
 for (size_t i = length-1; i > 0; i--)
   {
-      for (size_t j = 0; j < i; j++)
+      int tempIndex = i;
+      for (size_t j = 0; j < tempIndex; j++)
       {
           if (array[j]>array[j+1])
           {
               swap(array[j],array[j+1]);
+              tempIndex = j;    //记录最后一次的交换位置,在此之后的元素在下一轮扫描中均不考虑
           }
       }
       
@@ -109,6 +111,7 @@ int  main()
     TestData::testSort("insertionSort",insertionSort,arr_copy,length);
     TestData::testSort("insertionSortOptimization",insertionSortOptimization,arr_copy_1,length);
     TestData::testSort("BubbleSort",BubbleSort,arr_copy_2,length);
+    TestData::testSort("BubbleSortOptimization",BubbleSortOptimization,arr_copy_2,length);
     delete[]arr;
     delete[]arr_copy;
     delete[]arr_copy_1;
